@@ -5,12 +5,9 @@ import {
   ArrowLeft, 
   Star, 
   Heart, 
-  Music, 
-  Sparkles,
+  Users,
   Calendar,
-  MapPin,
-  Mic,
-  Users
+  MapPin
 } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -34,8 +31,8 @@ const characters = [
     hometown: '東京都',
     specialty: '舞蹈、鋼琴',
     hobby: '烘焙甜點、看動漫',
-    description: '擁有陽光般燦爛笑容的新人偶像，憑藉著對舞台的熱愛和不懈努力，正在偶像之路上閃閃發光。雖然經驗尚淺，但她那股不服輸的勁頭和真誠的性格感染著身邊的每一個人。',
-    backstory: '從小就夢想成為偶像的美月，在高中入學時偶然看到了一場震撼心靈的演唱會，從此堅定了自己的夢想。她加入了學校的偶像社團，從零開始學習唱歌、跳舞。雖然起步較晚，但她憑藉著驚人的毅力和天生的舞台魅力，很快成為了社團的核心成員。',
+    description: '擁有陽光般燦爛笑容的新人偶像，憑藉著對舞台的熱愛和不懈努力，正在偶像之路上閃閃發光。',
+    backstory: '從小就夢想成為偶像的美月，在高中入學時偶然看到了一場震撼心靈的演唱會，從此堅定了自己的夢想。',
     skills: [
       { name: '舞蹈', level: 85, icon: '💃' },
       { name: '歌唱', level: 75, icon: '🎤' },
@@ -45,7 +42,6 @@ const characters = [
     quotes: [
       '只要不放棄，夢想一定會實現！',
       '今天的努力，就是明天的閃耀！',
-      '我想成為能讓大家露出笑容的偶像！'
     ],
     likes: 12500,
     fans: 8900
@@ -67,8 +63,8 @@ const characters = [
     hometown: '京都府',
     specialty: '芭蕾舞、小提琴',
     hobby: '閱讀、觀星',
-    description: '冷靜沉著的實力派偶像，以獨特的魅力和精湛的舞技征服無數粉絲的心。她總是保持著優雅的姿態，但內心深處卻藏著對偶像事業的無比熱情。',
-    backstory: '出生於傳統藝術世家的夜空，從小就接受嚴格的芭蕾舞和小提琴訓練。原本被期望成為古典音樂家的她，在一次偶然的機會中接觸到了偶像文化，被那種能夠直接與觀眾心靈相通的表演形式深深吸引。她毅然決定追隨自己的內心，踏上了偶像之路。',
+    description: '冷靜沉著的實力派偶像，以獨特的魅力和精湛的舞技征服無數粉絲的心。',
+    backstory: '出生於傳統藝術世家的夜空，從小就接受嚴格的芭蕾舞和小提琴訓練。',
     skills: [
       { name: '舞蹈', level: 95, icon: '💃' },
       { name: '歌唱', level: 85, icon: '🎤' },
@@ -78,7 +74,6 @@ const characters = [
     quotes: [
       '舞台是我的歸宿，舞蹈是我的語言。',
       '不需要言語，讓表演來訴說一切。',
-      '在星空下，每個人都是平等的夢想家。'
     ],
     likes: 18200,
     fans: 12500
@@ -100,8 +95,8 @@ const characters = [
     hometown: '大阪府',
     specialty: '作詞作曲、吉他',
     hobby: '街頭表演、電玩遊戲',
-    description: '天生的舞台王者，擁有令人驚嘆的表演天賦，每一次演出都是視覺與聽覺的盛宴。他輕鬆自在的態度下，是對音樂和表演的無比執著。',
-    backstory: '從小就在街頭表演的光，憑藉著天生的音樂才華和獨特的個人魅力，很快在地下音樂圈嶄露頭角。他能夠輕鬆地創作出打動人心的歌曲，並且擁有讓任何舞台都為之沸騰的表演能力。雖然表面上看似隨性，但對於音樂創作卻有著近乎偏執的追求。',
+    description: '天生的舞台王者，擁有令人驚嘆的表演天賦，每一次演出都是視覺與聽覺的盛宴。',
+    backstory: '從小就在街頭表演的光，憑藉著天生的音樂才華和獨特的個人魅力，很快在地下音樂圈嶄露頭角。',
     skills: [
       { name: '舞蹈', level: 88, icon: '💃' },
       { name: '歌唱', level: 95, icon: '🎤' },
@@ -110,28 +105,12 @@ const characters = [
     ],
     quotes: [
       '音樂是靈魂的語言，讓我們一起說話吧！',
-      '沒有什麼比看到觀眾的笑容更讓人滿足的了。',
-      '每一次表演，都是一次全新的冒險！'
+      '每一次表演，都是一次全新的冒險！',
     ],
     likes: 25000,
     fans: 18000
   }
 ]
-
-// 动画配置
-const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6 }
-}
-
-const staggerContainer = {
-  animate: {
-    transition: {
-      staggerChildren: 0.15
-    }
-  }
-}
 
 export default function CharactersPage() {
   const [selectedCharacter, setSelectedCharacter] = useState<typeof characters[0] | null>(null)
@@ -157,35 +136,27 @@ export default function CharactersPage() {
 
       <div className="pt-24 pb-16 px-4">
         {/* 页面标题 */}
-        <motion.div 
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
+        <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             🌟 登場角色
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             與三位性格迥異的偶像候補生一起，書寫屬於你們的演藝故事
           </p>
-        </motion.div>
+        </div>
 
         {/* 角色卡片网格 */}
-        <motion.div 
-          className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8"
-          variants={staggerContainer}
-          initial="initial"
-          animate="animate"
-        >
+        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
           {characters.map((character) => (
-            <motion.div
+            <div
               key={character.id}
               className="group cursor-pointer"
-              variants={fadeInUp}
-              whileHover={{ y: -10 }}
               onClick={() => setSelectedCharacter(character)}
             >
-              <div className={`relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-2 ${character.borderColor}`}>
+              <motion.div 
+                className={`relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-2 ${character.borderColor}`}
+                whileHover={{ y: -10 }}
+              >
                 {/* 角色头像区域 */}
                 <div className={`h-56 bg-gradient-to-br ${character.color} flex items-center justify-center relative overflow-hidden`}>
                   <motion.div
@@ -195,7 +166,6 @@ export default function CharactersPage() {
                   >
                     {character.emoji}
                   </motion.div>
-                  {/* 装饰光效 */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                   
                   {/* 粉丝数 */}
@@ -208,9 +178,7 @@ export default function CharactersPage() {
                 {/* 角色信息 */}
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-2xl font-bold text-gray-900">
-                      {character.name}
-                    </h3>
+                    <h3 className="text-2xl font-bold text-gray-900">{character.name}</h3>
                     <span className={`text-sm font-medium ${character.textColor} bg-opacity-20 px-2 py-1 rounded-full ${character.bgColor}`}>
                       {character.age}歲
                     </span>
@@ -233,15 +201,15 @@ export default function CharactersPage() {
                 </div>
 
                 {/* 查看详情按钮 */}
-                <div className={`px-6 pb-6`}>
+                <div className="px-6 pb-6">
                   <button className={`w-full py-3 rounded-xl bg-gradient-to-r ${character.color} text-white font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
                     查看詳情
                   </button>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* 角色详情弹窗 */}
         {selectedCharacter && (
@@ -270,17 +238,14 @@ export default function CharactersPage() {
 
               {/* 内容 */}
               <div className="p-8">
-                {/* 基本信息 */}
-                <div className="mb-6">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-1">{selectedCharacter.name}</h2>
-                  <p className="text-gray-500">{selectedCharacter.nameEn}</p>
-                  <p className={`text-sm font-medium bg-gradient-to-r ${selectedCharacter.color} bg-clip-text text-transparent mt-1`}>
-                    {selectedCharacter.title}
-                  </p>
-                </div>
+                <h2 className="text-3xl font-bold text-gray-900 mb-1">{selectedCharacter.name}</h2>
+                <p className="text-gray-500">{selectedCharacter.nameEn}</p>
+                <p className={`text-sm font-medium bg-gradient-to-r ${selectedCharacter.color} bg-clip-text text-transparent mt-1`}>
+                  {selectedCharacter.title}
+                </p>
 
                 {/* 详细资料 */}
-                <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="grid grid-cols-2 gap-4 my-6">
                   <div className="flex items-center gap-2 text-gray-600">
                     <Calendar className="w-4 h-4" />
                     <span className="text-sm">生日：{selectedCharacter.birthday}</span>
@@ -300,16 +265,14 @@ export default function CharactersPage() {
                 </div>
 
                 {/* 特长和爱好 */}
-                <div className="mb-6">
-                  <div className="flex gap-4 text-sm">
-                    <div className="bg-gray-100 rounded-lg px-3 py-2">
-                      <span className="text-gray-500">特長：</span>
-                      <span className="text-gray-700 ml-1">{selectedCharacter.specialty}</span>
-                    </div>
-                    <div className="bg-gray-100 rounded-lg px-3 py-2">
-                      <span className="text-gray-500">愛好：</span>
-                      <span className="text-gray-700 ml-1">{selectedCharacter.hobby}</span>
-                    </div>
+                <div className="flex gap-4 text-sm mb-6">
+                  <div className="bg-gray-100 rounded-lg px-3 py-2">
+                    <span className="text-gray-500">特長：</span>
+                    <span className="text-gray-700 ml-1">{selectedCharacter.specialty}</span>
+                  </div>
+                  <div className="bg-gray-100 rounded-lg px-3 py-2">
+                    <span className="text-gray-500">愛好：</span>
+                    <span className="text-gray-700 ml-1">{selectedCharacter.hobby}</span>
                   </div>
                 </div>
 
@@ -317,12 +280,6 @@ export default function CharactersPage() {
                 <div className="mb-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">角色簡介</h3>
                   <p className="text-gray-600 leading-relaxed">{selectedCharacter.description}</p>
-                </div>
-
-                {/* 背景故事 */}
-                <div className="mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">背景故事</h3>
-                  <p className="text-gray-600 leading-relaxed">{selectedCharacter.backstory}</p>
                 </div>
 
                 {/* 技能数值 */}
@@ -382,14 +339,9 @@ export default function CharactersPage() {
         )}
 
         {/* 底部提示 */}
-        <motion.div 
-          className="text-center mt-12 text-gray-500"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-        >
+        <div className="text-center mt-12 text-gray-500">
           <p>點擊角色卡片查看詳細資料</p>
-        </motion.div>
+        </div>
       </div>
     </main>
   )

@@ -3,7 +3,7 @@
 3:I[52683,["/nextjs-game-website/_next/static/chunks/4b935edd0cea1ee3.js","/nextjs-game-website/_next/static/chunks/66346ad2836c1601.js","/nextjs-game-website/_next/static/chunks/6c44437340ec825e.js","/nextjs-game-website/_next/static/chunks/7873a2df4d865ad9.js","/nextjs-game-website/_next/static/chunks/d495e8f91e385b3f.js"],"default"]
 6:I[97367,["/nextjs-game-website/_next/static/chunks/ff1a16fafef87110.js","/nextjs-game-website/_next/static/chunks/d2be314c3ece3fbe.js"],"OutletBoundary"]
 7:"$Sreact.suspense"
-0:{"buildId":"UVICu32y8QoyYdpDFhCoM","rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/nextjs-game-website/_next/static/chunks/7873a2df4d865ad9.js","async":true}],["$","script","script-1",{"src":"/nextjs-game-website/_next/static/chunks/d495e8f91e385b3f.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"AlKxfliUM5x1E4o6kzJsW","rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/nextjs-game-website/_next/static/chunks/7873a2df4d865ad9.js","async":true}],["$","script","script-1",{"src":"/nextjs-game-website/_next/static/chunks/d495e8f91e385b3f.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"loading":null,"isPartial":false}
 4:{}
 5:"$0:rsc:props:children:0:props:serverProvidedParams:params"
 8:null

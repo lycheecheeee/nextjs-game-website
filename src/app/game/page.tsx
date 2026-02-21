@@ -10,13 +10,12 @@ import { Button } from '@/components/ui/button'
 const GAME_CONFIG = {
   lanes: ['D', 'F', 'J', 'K'],
   laneColors: ['bg-pink-500', 'bg-purple-500', 'bg-indigo-500', 'bg-blue-500'],
-  noteSpeed: 4, // 秒
-  spawnInterval: 800, // 毫秒
-  perfectWindow: 50, // px
-  goodWindow: 100, // px
+  noteSpeed: 4,
+  spawnInterval: 800,
+  perfectWindow: 50,
+  goodWindow: 100,
 }
 
-// 音符类型
 interface Note {
   id: number
   lane: number
@@ -25,7 +24,6 @@ interface Note {
   missed: boolean
 }
 
-// 评分类型
 type ScoreType = 'perfect' | 'good' | 'miss'
 
 export default function GamePage() {
@@ -41,7 +39,6 @@ export default function GamePage() {
   const gameLoopRef = useRef<NodeJS.Timeout | null>(null)
   const spawnLoopRef = useRef<NodeJS.Timeout | null>(null)
 
-  // 生成随机音符
   const spawnNote = useCallback(() => {
     const lane = Math.floor(Math.random() * 4)
     setNotes(prev => [...prev, {
@@ -53,11 +50,10 @@ export default function GamePage() {
     }])
   }, [])
 
-  // 更新音符位置
   const updateNotes = useCallback(() => {
     setNotes(prev => {
-      const gameHeight = 500 // 游戏区域高度
-      const hitZoneY = gameHeight - 80 // 判定线位置
+      const gameHeight = 500
+      const hitZoneY = gameHeight - 80
       
       return prev
         .map(note => ({
@@ -65,10 +61,8 @@ export default function GamePage() {
           y: note.y + 8
         }))
         .filter(note => {
-          // 移除已击中或超出屏幕的音符
           if (note.hit) return false
           if (note.y > hitZoneY + GAME_CONFIG.goodWindow && !note.missed) {
-            // 标记为错过
             setCombo(0)
             setHitFeedback({ type: 'miss', lane: note.lane })
             setTimeout(() => setHitFeedback(null), 300)
@@ -79,7 +73,6 @@ export default function GamePage() {
     })
   }, [])
 
-  // 开始游戏
   const startGame = () => {
     setGameState('playing')
     setNotes([])
@@ -88,36 +81,30 @@ export default function GamePage() {
     setMaxCombo(0)
     noteIdRef.current = 0
     
-    // 开始生成音符
     spawnLoopRef.current = setInterval(spawnNote, GAME_CONFIG.spawnInterval)
-    // 开始游戏循环
     gameLoopRef.current = setInterval(updateNotes, 16)
   }
 
-  // 暂停游戏
   const pauseGame = () => {
     setGameState('paused')
     if (spawnLoopRef.current) clearInterval(spawnLoopRef.current)
     if (gameLoopRef.current) clearInterval(gameLoopRef.current)
   }
 
-  // 继续游戏
   const resumeGame = () => {
     setGameState('playing')
     spawnLoopRef.current = setInterval(spawnNote, GAME_CONFIG.spawnInterval)
     gameLoopRef.current = setInterval(updateNotes, 16)
   }
 
-  // 结束游戏
   const endGame = () => {
     setGameState('ended')
     if (spawnLoopRef.current) clearInterval(spawnLoopRef.current)
     if (gameLoopRef.current) clearInterval(gameLoopRef.current)
   }
 
-  // 击打音符
   const hitNote = useCallback((laneIndex: number) => {
-    const hitZoneY = 420 // 判定线位置
+    const hitZoneY = 420
     
     setNotes(prev => {
       const noteToHit = prev.find(note => 
@@ -160,7 +147,6 @@ export default function GamePage() {
     })
   }, [combo])
 
-  // 键盘事件
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const key = e.key.toUpperCase()
@@ -171,7 +157,6 @@ export default function GamePage() {
         hitNote(laneIndex)
       }
       
-      // ESC 暂停
       if (e.key === 'Escape' && gameState === 'playing') {
         pauseGame()
       }
@@ -195,7 +180,6 @@ export default function GamePage() {
     }
   }, [gameState, hitNote])
 
-  // 清理
   useEffect(() => {
     return () => {
       if (spawnLoopRef.current) clearInterval(spawnLoopRef.current)
@@ -224,24 +208,15 @@ export default function GamePage() {
 
       <div className="pt-24 pb-8 px-4 flex flex-col items-center">
         {/* 游戏标题 */}
-        <motion.div 
-          className="text-center mb-8"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
+        <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
             🎵 音樂節奏挑戰
           </h1>
           <p className="text-gray-400">使用 D, F, J, K 鍵擊打音符</p>
-        </motion.div>
+        </div>
 
         {/* 分数显示 */}
-        <motion.div 
-          className="flex gap-8 mb-6"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2 }}
-        >
+        <div className="flex gap-8 mb-6">
           <div className="text-center">
             <div className="text-3xl font-bold text-white">{Math.floor(score)}</div>
             <div className="text-sm text-gray-400">分數</div>
@@ -254,16 +229,10 @@ export default function GamePage() {
             <div className="text-3xl font-bold text-purple-400">{maxCombo}</div>
             <div className="text-sm text-gray-400">最大連擊</div>
           </div>
-        </motion.div>
+        </div>
 
         {/* 游戏区域 */}
-        <motion.div 
-          className="relative bg-black/50 rounded-2xl overflow-hidden border border-white/10"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-        >
-          {/* 游戏画布 */}
+        <div className="relative bg-black/50 rounded-2xl overflow-hidden border border-white/10">
           <div className="relative w-[320px] h-[500px]">
             {/* 轨道 */}
             <div className="absolute inset-0 flex">
@@ -290,8 +259,6 @@ export default function GamePage() {
                     left: `${note.lane * 80 + 1}px`,
                     top: `${note.y}px`,
                   }}
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 1.5, opacity: 0 }}
                   transition={{ duration: 0.1 }}
                 />
@@ -336,15 +303,10 @@ export default function GamePage() {
               ))}
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* 控制按钮 */}
-        <motion.div 
-          className="flex gap-4 mt-6"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
+        <div className="flex gap-4 mt-6">
           {gameState === 'idle' && (
             <Button 
               size="lg"
@@ -409,15 +371,10 @@ export default function GamePage() {
               重新開始
             </Button>
           )}
-        </motion.div>
+        </div>
 
         {/* 游戏说明 */}
-        <motion.div 
-          className="mt-8 text-center text-gray-400 text-sm max-w-md"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-        >
+        <div className="mt-8 text-center text-gray-400 text-sm max-w-md">
           <p className="mb-2">💡 遊戲提示</p>
           <ul className="space-y-1">
             <li>• 當音符到達底部判定線時按下對應按鍵</li>
@@ -425,7 +382,7 @@ export default function GamePage() {
             <li>• 連擊會獲得額外加分</li>
             <li>• 按 ESC 暫停遊戲</li>
           </ul>
-        </motion.div>
+        </div>
 
         {/* 游戏结束统计 */}
         <AnimatePresence>
